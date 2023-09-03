@@ -1,17 +1,9 @@
 using System;
-using UnityEditor;
-using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Timeline;
 
 public static class TimelineUtilities
 {
-    [MenuItem("Tools/Refresh Timeline Editor Window")]
-    public static void RefreshTimelineEditor()
-    {
-        TimelineEditor.Refresh(RefreshReason.ContentsAddedOrRemoved);
-    }
-
     /// <summary>
     /// Create empty curves for a clip with provided default values.
     /// Use in conjunction with PlayableTrack.
