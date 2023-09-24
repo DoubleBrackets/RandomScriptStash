@@ -5,7 +5,7 @@ Shader "Example/URPUnlitShaderTexture"
     // called Base Map.
     Properties
     {
-        [MainTexture] _BaseMap("Base Map", 2D) = "white"
+        [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
     }
 
     SubShader
@@ -63,6 +63,7 @@ Shader "Example/URPUnlitShaderTexture"
                 // The SAMPLE_TEXTURE2D marco samples the texture with the given
                 // sampler.
                 half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
+
                 return color;
             }
             ENDHLSL

@@ -1,10 +1,11 @@
 // This shader fills the mesh shape with a color predefined in the code.
-Shader "Example/URPUnlitShaderBasic"
+Shader "Example/URPUnlitShader"
 {
-    // The properties block of the Unity shader. In this example this block is empty
-    // because the output color is predefined in the fragment shader code.
+    // The properties block of the Unity shader
     Properties
-    { }
+    {
+        [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
+    }
 
     // The SubShader block containing the Shader code.
     SubShader
@@ -43,6 +44,15 @@ Shader "Example/URPUnlitShaderBasic"
                 float4 positionHCS  : SV_POSITION;
             };
 
+             // To make the Unity shader SRP Batcher compatible, declare all
+            // properties related to a Material in a a single CBUFFER block with
+            // the name UnityPerMaterial.
+            CBUFFER_START(UnityPerMaterial)
+                // The following line declares the _BaseColor variable, so that you
+                // can use it in the fragment shader.
+                half4 _BaseColor;
+            CBUFFER_END
+
             // The vertex shader definition with properties defined in the Varyings
             // structure. The type of the vert function must match the type (struct)
             // that it returns.
@@ -60,9 +70,7 @@ Shader "Example/URPUnlitShaderBasic"
             // The fragment shader definition.
             half4 frag() : SV_Target
             {
-                // Defining the color variable and returning it.
-                half4 customColor = half4(0.5, 0, 0, 1);
-                return customColor;
+                return _BaseColor;
             }
             ENDHLSL
         }
