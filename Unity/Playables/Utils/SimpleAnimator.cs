@@ -30,7 +30,10 @@ public class SimpleAnimator : MonoBehaviour, IAnimationClipSource
 
     private void OnDestroy()
     {
-        playableGraph.Destroy();
+        if (playableGraph.IsValid())
+        {
+            playableGraph.Destroy();
+        }
     }
 
     public void Play()
