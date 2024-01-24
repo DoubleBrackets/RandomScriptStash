@@ -1,20 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class SFXOneshotPlayer : MonoBehaviour
 {
     public static SFXOneshotPlayer Instance;
 
-    private AudioSource source;
-
     private void Awake()
     {
         Instance = this;
-        source = GetComponent<AudioSource>();
     }
 
-    public void PlaySFXOneshot(AudioClip audioClip)
+    public void PlaySFXOneshot(Vector3 position, AudioClip audioClip)
     {
-        source.PlayOneShot(audioClip);
+        AudioSource.PlayClipAtPoint(position, audioClip);
     }
 }
